@@ -33,7 +33,7 @@
 
    ## 问题二：
          glide冲突
-          由于PictureSelector 2.0引入的是最新的glide 4.5.0,所以将项目中老版本的glide删除,并且将报错代码换成如下写法：
+          由于MultimediaCamera引入的是最新的glide 4.5.0,请将项目中老版本的glide删除,并且将报错代码换成如下写法：
           RequestOptions options = new RequestOptions();
           options.placeholder(R.drawable.image);
           Glide.with(context).load(url).apply(options).into(imageView);
