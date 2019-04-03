@@ -2,79 +2,76 @@
 多媒体相机
 
 # 添加权限
-<!---->
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.CAMERA" />
+    <!---->
+     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     <uses-permission android:name="android.permission.CAMERA" />
 
 # 集成方式
 ## compile引入
 
-dependencies {
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
-}
+     dependencies {
+        implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+      }
 ## 项目根目录build.gradle加入
-allprojects {
-   repositories {
-      jcenter()
-      maven { url 'https://jitpack.io' }
-   }
-}
+      allprojects {
+           repositories {
+              jcenter()
+               maven { url 'https://jitpack.io' }
+           }
+       }
 
 # 常见错误
-重要：PictureSelector.create()；调用此方法时，在activity中传activity.this，在fragment中请传fragment.this,
- 影响回调到哪个地方的onActivityResult()。
+    重要：PictureSelector.create()；调用此方法时，在activity中传activity.this，在fragment中请传fragment.this,
+    影响回调到哪个地方的onActivityResult()。
 
- 问题一：
- rxjava冲突：在app build.gradle下添加
- packagingOptions {
-   exclude 'META-INF/rxjava.properties'
- }
+   问题一：
+    rxjava冲突：在app build.gradle下添加
+    packagingOptions {
+    exclude 'META-INF/rxjava.properties'
+    }
 
- 问题二：
- java.lang.NullPointerException:
- Attempt to invoke virtual method 'android.content.res.XmlResourceParser
- android.content.pm.ProviderInfo.loadXmlMetaData(android.content.pm.PackageManager, java.lang.String)'
- on a null object reference
+   问题二：
+      java.lang.NullPointerException:
+      Attempt to invoke virtual method 'android.content.res.XmlResourceParser
+      android.content.pm.ProviderInfo.loadXmlMetaData(android.content.pm.PackageManager, java.lang.String)'
+      on a null object reference
 
  * 注意 从v2.1.3版本中，将不需要配制以下内容
+     application下添加如下节点:
+      <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+           <meta-data
+              android:name="android.support.FILE_PROVIDER_PATHS"
+               android:resource="@xml/file_paths" />
+       </provider>
 
- application下添加如下节点:
+     问题三：
+       经测试在小米部分低端机中，Fragment调用PictureSelector 2.0 拍照有时内存不足会暂时回收activity,
+       导致其fragment会重新创建 建议在fragment所依赖的activity加上如下代码:
 
- <provider
-      android:name="android.support.v4.content.FileProvider"
-      android:authorities="${applicationId}.provider"
-      android:exported="false"
-      android:grantUriPermissions="true">
-       <meta-data
-         android:name="android.support.FILE_PROVIDER_PATHS"
-         android:resource="@xml/file_paths" />
-</provider>
-
-问题三：
-经测试在小米部分低端机中，Fragment调用PictureSelector 2.0 拍照有时内存不足会暂时回收activity,
-
-导致其fragment会重新创建 建议在fragment所依赖的activity加上如下代码:
-
-if (savedInstanceState == null) {
-      // 添加显示第一个fragment
-      	fragment = new PhotoFragment();
-      		getSupportFragmentManager().beginTransaction().add(R.id.tab_content, fragment,
+         if (savedInstanceState == null) {
+            // 添加显示第一个fragment
+      	    fragment = new PhotoFragment();
+      		    getSupportFragmentManager().beginTransaction().add(R.id.tab_content, fragment,
                     PictureConfig.FC_TAG).show(fragment)
                     .commit();
-     } else {
-      	fragment = (PhotoFragment) getSupportFragmentManager()
-          .findFragmentByTag(PictureConfig.FC_TAG);
-}
+           } else {
+      	      fragment = (PhotoFragment) getSupportFragmentManager()
+                   .findFragmentByTag(PictureConfig.FC_TAG);
+         }
 
-这里就是如果是被回收时，则不重新创建 通过tag取出fragment的实例。
+      这里就是如果是被回收时，则不重新创建 通过tag取出fragment的实例。
 
-问题四：
-glide冲突
-由于PictureSelector 2.0引入的是最新的glide 4.5.0,所以将项目中老版本的glide删除,并且将报错代码换成如下写法：
-RequestOptions options = new RequestOptions();
-options.placeholder(R.drawable.image);
-Glide.with(context).load(url).apply(options).into(imageView);
+      问题四：
+         glide冲突
+          由于PictureSelector 2.0引入的是最新的glide 4.5.0,所以将项目中老版本的glide删除,并且将报错代码换成如下写法：
+          RequestOptions options = new RequestOptions();
+          options.placeholder(R.drawable.image);
+          Glide.with(context).load(url).apply(options).into(imageView);
 
 # 功能配置
     // 进入相册 以下是例子：用不到的api可以不写
@@ -115,8 +112,8 @@ Glide.with(context).load(url).apply(options).into(imageView);
  	  .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
 
  # 缓存清除
-  //包括裁剪和压缩后的缓存，要在上传成功后调用，注意：需要系统sd卡权限
-  PictureFileUtils.deleteCacheDirFile(MainActivity.this);
+     //包括裁剪和压缩后的缓存，要在上传成功后调用，注意：需要系统sd卡权限
+     PictureFileUtils.deleteCacheDirFile(MainActivity.this);
 
  # 主题配置
  <!--默认样式 注意* 样式只可修改，不能删除任何一项 否则报错-->
@@ -176,15 +173,15 @@ Glide.with(context).load(url).apply(options).into(imageView);
 
  # 常用功能
  ## 启动相册并拍照
-  PictureSelector.create(MainActivity.this)
-        .openGallery(PictureMimeType.ofImage())
-        .forResult(PictureConfig.CHOOSE_REQUEST);
+       PictureSelector.create(MainActivity.this)
+          .openGallery(PictureMimeType.ofImage())
+           .forResult(PictureConfig.CHOOSE_REQUEST);
   ## 预览图片
-  // 预览图片 可自定长按保存路径
-  *注意 .themeStyle(themeId)；不可少，否则闪退...
+        // 预览图片 可自定长按保存路径
+        *注意 .themeStyle(themeId)；不可少，否则闪退...
 
-  PictureSelector.create(MainActivity.this).themeStyle(themeId).openExternalPreview(position, "/custom_file", selectList);
-  PictureSelector.create(MainActivity.this).themeStyle(themeId).openExternalPreview(position, selectList);
+          PictureSelector.create(MainActivity.this).themeStyle(themeId).openExternalPreview(position, "/custom_file", selectList);
+          PictureSelector.create(MainActivity.this).themeStyle(themeId).openExternalPreview(position, selectList);
 
 ## 结果回调
     @Override
