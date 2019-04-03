@@ -34,13 +34,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * author：luck
- * project：PictureSelector
- * package：com.luck.picture.ui
- * email：893855882@qq.com
- * data：16/12/31
- */
 public class PicturePreviewActivity extends PictureBaseActivity implements
         View.OnClickListener, Animation.AnimationListener, SimpleFragmentAdapter.OnCallBackActivity {
     private ImageView picture_left_back;
