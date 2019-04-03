@@ -53,7 +53,9 @@ allprojects {
 
 问题三：
 经测试在小米部分低端机中，Fragment调用PictureSelector 2.0 拍照有时内存不足会暂时回收activity,
+
 导致其fragment会重新创建 建议在fragment所依赖的activity加上如下代码:
+
 if (savedInstanceState == null) {
       // 添加显示第一个fragment
       	fragment = new PhotoFragment();
@@ -64,6 +66,7 @@ if (savedInstanceState == null) {
       	fragment = (PhotoFragment) getSupportFragmentManager()
           .findFragmentByTag(PictureConfig.FC_TAG);
 }
+
 这里就是如果是被回收时，则不重新创建 通过tag取出fragment的实例。
 
 问题四：
@@ -73,8 +76,10 @@ RequestOptions options = new RequestOptions();
 options.placeholder(R.drawable.image);
 Glide.with(context).load(url).apply(options).into(imageView);
 
-#功能配置
+# 功能配置
+
 // 进入相册 以下是例子：用不到的api可以不写
+
  PictureSelector.create(MainActivity.this)
  	.openGallery()//PictureMimeType..ofImage()
  	.theme()//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
@@ -111,11 +116,11 @@ Glide.with(context).load(url).apply(options).into(imageView);
 	.isDragFrame(false)// 是否可拖动裁剪框(固定)
  	.forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
 
- #缓存清除
+ # 缓存清除
   //包括裁剪和压缩后的缓存，要在上传成功后调用，注意：需要系统sd卡权限
   PictureFileUtils.deleteCacheDirFile(MainActivity.this);
 
- #主题配置
+ # 主题配置
  <!--默认样式 注意* 样式只可修改，不能删除任何一项 否则报错-->
      <style name="picture.default.style" parent="Theme.AppCompat.Light.DarkActionBar">
          <!-- Customize your theme here. -->
@@ -171,19 +176,19 @@ Glide.with(context).load(url).apply(options).into(imageView);
          <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
      </style>
 
- #常用功能
- ##启动相册并拍照
+ # 常用功能
+ ## 启动相册并拍照
   PictureSelector.create(MainActivity.this)
         .openGallery(PictureMimeType.ofImage())
         .forResult(PictureConfig.CHOOSE_REQUEST);
-  ##预览图片
+  ## 预览图片
   // 预览图片 可自定长按保存路径
   *注意 .themeStyle(themeId)；不可少，否则闪退...
 
   PictureSelector.create(MainActivity.this).themeStyle(themeId).openExternalPreview(position, "/custom_file", selectList);
   PictureSelector.create(MainActivity.this).themeStyle(themeId).openExternalPreview(position, selectList);
 
-##结果回调
+## 结果回调
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
