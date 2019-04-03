@@ -1,17 +1,17 @@
 # MultimediaCamera
 多媒体相机
 
-#添加权限
+# 添加权限
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.CAMERA" />
 
-#集成方式
-##compile引入
+# 集成方式
+## compile引入
 dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 }
-##项目根目录build.gradle加入
+## 项目根目录build.gradle加入
 allprojects {
    repositories {
       jcenter()
@@ -19,7 +19,7 @@ allprojects {
    }
 }
 
-#常见错误
+# 常见错误
 重要：PictureSelector.create()；调用此方法时，在activity中传activity.this，在fragment中请传fragment.this,
  影响回调到哪个地方的onActivityResult()。
 
@@ -48,9 +48,6 @@ allprojects {
          android:name="android.support.FILE_PROVIDER_PATHS"
          android:resource="@xml/file_paths" />
 </provider>
-
-注意：如已添加其他sdk或项目中已使用过provider节点，
-[请参考我的博客](http://blog.csdn.net/luck_mw/article/details/54970105)的解决方案
 
 问题三：
 经测试在小米部分低端机中，Fragment调用PictureSelector 2.0 拍照有时内存不足会暂时回收activity,
