@@ -2,12 +2,14 @@
 多媒体相机
 
 # 添加权限
+<!---->
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.CAMERA" />
 
 # 集成方式
 ## compile引入
+
 dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 }
