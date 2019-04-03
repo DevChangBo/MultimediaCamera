@@ -77,9 +77,6 @@ options.placeholder(R.drawable.image);
 Glide.with(context).load(url).apply(options).into(imageView);
 
 # 功能配置
-
-// 进入相册 以下是例子：用不到的api可以不写
-
  PictureSelector.create(MainActivity.this)
  	.openGallery()//PictureMimeType..ofImage()
  	.theme()//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
