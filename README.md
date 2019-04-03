@@ -32,41 +32,6 @@
         }
 
    ## 问题二：
-        java.lang.NullPointerException:
-        Attempt to invoke virtual method 'android.content.res.XmlResourceParser
-        android.content.pm.ProviderInfo.loadXmlMetaData(android.content.pm.PackageManager, java.lang.String)'
-        on a null object reference
-
-     * 注意 从v2.1.3版本中，将不需要配制以下内容
-        application下添加如下节点:
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-           <meta-data
-              android:name="android.support.FILE_PROVIDER_PATHS"
-               android:resource="@xml/file_paths" />
-        </provider>
-
-   ## 问题三：
-       经测试在小米部分低端机中，Fragment调用PictureSelector 2.0 拍照有时内存不足会暂时回收activity,
-       导致其fragment会重新创建 建议在fragment所依赖的activity加上如下代码:
-
-         if (savedInstanceState == null) {
-            // 添加显示第一个fragment
-      	    fragment = new PhotoFragment();
-      		    getSupportFragmentManager().beginTransaction().add(R.id.tab_content, fragment,
-                    PictureConfig.FC_TAG).show(fragment)
-                    .commit();
-           } else {
-      	      fragment = (PhotoFragment) getSupportFragmentManager()
-                   .findFragmentByTag(PictureConfig.FC_TAG);
-         }
-
-      这里就是如果是被回收时，则不重新创建 通过tag取出fragment的实例。
-
-   ## 问题四：
          glide冲突
           由于PictureSelector 2.0引入的是最新的glide 4.5.0,所以将项目中老版本的glide删除,并且将报错代码换成如下写法：
           RequestOptions options = new RequestOptions();
