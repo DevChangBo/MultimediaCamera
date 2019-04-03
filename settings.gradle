@@ -1,0 +1,1 @@
+include ':app', ':multimedia_library', ':ucrop'
