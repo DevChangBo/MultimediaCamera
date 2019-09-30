@@ -2,7 +2,7 @@ package com.cb.multimedia_library.config;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.StyleRes;
+import androidx.annotation.StyleRes;
 
 import com.cb.multimedia_library.R;
 import com.cb.multimedia_library.entity.LocalMedia;

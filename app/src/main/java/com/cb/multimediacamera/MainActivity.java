@@ -3,11 +3,7 @@ package com.cb.multimediacamera;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Environment;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.multimedia_library.PictureSelector;
 import com.cb.multimedia_library.config.PictureConfig;
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Observer<Boolean>() {
             @Override
             public void onSubscribe(Disposable d) {
+
             }
 
             @Override
@@ -138,10 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onError(Throwable e) {
+
             }
 
             @Override
             public void onComplete() {
+
             }
         });
 

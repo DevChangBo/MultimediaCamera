@@ -10,10 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
+import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.cb.multimedia_library.adapter.PictureAlbumDirectoryAdapter;
 import com.cb.multimedia_library.adapter.PictureImageGridAdapter;
