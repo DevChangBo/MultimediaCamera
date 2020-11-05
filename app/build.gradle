@@ -6,8 +6,8 @@ android {
         applicationId "com.cb.multimediacamera"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 5
-        versionName "v1.0.6"
+        versionCode 7
+        versionName "v1.0.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,7 +25,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation "com.github.bumptech.glide:glide:4.5.0"
+    implementation "com.github.bumptech.glide:glide:4.9.0"
     implementation "io.reactivex.rxjava2:rxjava:2.0.5"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
     implementation project(':multimedia_library')
